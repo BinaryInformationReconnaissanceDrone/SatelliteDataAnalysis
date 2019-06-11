@@ -6,3 +6,10 @@ Created Reader class to read nc files
 Created Feeder class to feed processed data to Main class
 Basically I did the whole thing in one day
 Holy crap I'm good
+
+June 11
+Happy Birthday to myself
+Redid the process to be more OOP
+Created Seasonal Analysis
+Created a catch to stop loading excess files
+Created time series sorting

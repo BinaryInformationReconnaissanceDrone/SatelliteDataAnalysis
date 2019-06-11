@@ -8,13 +8,15 @@ package satelliteaod;
 import java.io.IOException;
 import java.util.ArrayList;
 import ucar.ma2.Array;
-import ucar.ma2.ArrayDouble;
 import ucar.nc2.*;
 
 /**
  *
  * @author eqiu
+ * @deprecated: the author was brain addled while he coded this, so don't
+ * fucking use this shit
  */
+@Deprecated
 public class Feeder {
 
     static NetcdfFile[] myFile;
@@ -31,7 +33,7 @@ public class Feeder {
             if (toBeProcessed.charAt(i) == ' ')
                 counter++;
         while (toBeProcessed.contains(" ")) {
-            System.out.println(toBeProcessed + toBeProcessed.indexOf(" "));
+//          System.out.println(toBeProcessed + toBeProcessed.indexOf(" "));
             buffer.add(Double.parseDouble(toBeProcessed.substring(0, toBeProcessed.indexOf(" "))));
             toBeProcessed = toBeProcessed.substring(toBeProcessed.indexOf(" ") + 1);
         }
@@ -52,7 +54,7 @@ public class Feeder {
                 } catch (IOException ioe) {
                     System.out.println("trying to read " + varName + ioe);
                 }
-                if (data != null) {
+                if (data != null)
                     switch (j) {
                         case 0:
                             latDump.addAll(convertArray(data));
@@ -67,9 +69,7 @@ public class Feeder {
                                 sum += d;
                             aodDump.add(sum / holder.size());
                             break;
-                    }
-                    convertArray(data);
-                }
+                    } //                    System.out.println(data);
             }
         double result = 0;
         double x = Integer.MAX_VALUE;

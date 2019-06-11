@@ -1,2 +1,8 @@
 June 9
 Created Git Repo
+
+June 10
+Created Reader class to read nc files
+Created Feeder class to feed processed data to Main class
+Basically I did the whole thing in one day
+Holy crap I'm good

@@ -39,29 +39,49 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        String place = "Addis Ababa";
-        Reader.init(new File("/Users/eqiu/Desktop/GMU Summer Project/fwmerra2data/" + place));
-        Reader.read();
+        String[] place = {"Addis Ababa", "Casablanca", "Gaborone", "Nairobi"};
+        for (int i = 0; i < 4; i++) {
+            Reader.init(new File("/Users/eqiu/Desktop/GMU Summer Project/fwmerra2data/" + place[i]));
+            Reader.read();
 
-        collection = DataFile.getCollection();
-        System.out.println(collection.size());
-        sort();
-//        for (DataFile d : collection)
-//            System.out.println(d);
+            collection = DataFile.getCollection();
+            System.out.println(collection.size());
+            sort();
+//            for (DataFile d : collection)
+//                System.out.println(d);
 
-        PrintWriter writer = new PrintWriter(new FileWriter(place + ".txt"));
-        int counter = 0;
-        for (DataFile d : collection) {
-            writer.println(d);
-            counter++;
+            PrintWriter rawWrite = new PrintWriter(new FileWriter("RAW" + place[i] + ".txt"));
+//            PrintWriter seasonWrite = new PrintWriter(new FileWriter("SEASON" + place + ".txt"));
+            PrintWriter monthWrite = new PrintWriter(new FileWriter("MONTH" + place[i] + ".txt"));
+            PrintWriter anomalyWrite = new PrintWriter(new FileWriter("ANOMALY" + place[i] + ".txt"));
+            for (DataFile d : collection)
+                rawWrite.println(d);
+//            System.out.println(collection.size());
+            rawWrite.close();
+
+//            SeasonalAnalysis.init(collection);
+//            SeasonalAnalysis.compileSeason();
+//
+//            for (Double d : SeasonalAnalysis.getResults())
+//                if (d != null)
+//                    seasonWrite.println(d);
+//
+//            seasonWrite.close();
+            AnomalyAnalysis.init(collection);
+            AnomalyAnalysis.compileAnomaly();
+            for (Double d : AnomalyAnalysis.getAnomaly())
+                if (d != null)
+                    anomalyWrite.println(d);
+            anomalyWrite.close();
+
+            for (double f : AnomalyAnalysis.getAverage())
+                monthWrite.println(f);
+
+            monthWrite.close();
+            Reader.close();
+            DataFile.reset();
+            AnomalyAnalysis.reset();
         }
-        System.out.println(collection.size());
-        writer.close();
-        Reader.close();
-        SeasonalAnalysis.init(collection);
-        SeasonalAnalysis.compileSeason();
-        SeasonalAnalysis.getResults();
-
     }
 
 }

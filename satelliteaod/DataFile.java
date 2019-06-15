@@ -73,6 +73,10 @@ public class DataFile {
         collection.add(this);
     }
 
+    public static void reset() {
+        collection = new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         ArrayList<Double> holder = convertArray(fileString);

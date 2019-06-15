@@ -41,7 +41,7 @@ public class Reader {
             for (int i = 0; i < fileList.length; i++)
                 if (fileList[i].contains(".nc")) {
                     fileName = newDirectory + "/" + fileList[i];
-                    System.out.println(fileName);
+//                    System.out.println(fileName);
                     holder = NetcdfFile.open(fileName);
                     ncfileList[i] = holder;
                     new DataFile(holder, fileList[i]);

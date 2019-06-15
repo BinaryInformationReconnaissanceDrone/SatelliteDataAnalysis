@@ -28,14 +28,12 @@ public final class SeasonalAnalysis {
         for (int i = 0; i < 40; i++)
             holder[i] = new ArrayList<>();
 
-        for (DataFile d : list) {
-            System.out.println(d.getYear() - 1980 + "LOOK AT ME" + Double.parseDouble(d.toString()));
+        for (DataFile d : list)
             holder[d.getYear() - 1980].add(Double.parseDouble(d.toString()));
-        }
 
         for (ArrayList<Double> arr : holder) {
-
             Double[] average = new Double[4];
+
             try {
                 average[0] = (arr.get(2) + arr.get(3) + arr.get(4)) / 3;
                 average[1] = (arr.get(5) + arr.get(6) + arr.get(7)) / 3;
@@ -44,6 +42,7 @@ public final class SeasonalAnalysis {
             } catch (IndexOutOfBoundsException e) {
                 System.err.println("incomplete year");
             }
+
             List a = Arrays.asList(average);
             result.addAll(Arrays.asList(average));
         }
@@ -51,8 +50,6 @@ public final class SeasonalAnalysis {
     }
 
     public static ArrayList<Double> getResults() {
-        for (Double d : result)
-            System.out.println(d);
         return result;
     }
 

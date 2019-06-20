@@ -1,4 +1,3 @@
 # AODAnalysis
 June9th, 21:30, George Mason University
-
-Coding is basically a process of hating yourself to hating yourself slightly less
+This Project looks through a list of NetCDF files and gather Aerosol Opitcal Depth data to print to a file.

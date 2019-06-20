@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class feeds data to main
  */
 package satelliteaod;
 
@@ -11,10 +9,9 @@ import ucar.ma2.Array;
 import ucar.nc2.*;
 
 /**
- *
  * @author eqiu
- * @deprecated: the author was brain addled while he coded this, so don't
- * fucking use this shit
+ * @deprecated: the logic of the code is now changed. I'm just too scared to
+ * actually delete it
  */
 @Deprecated
 public class Feeder {
@@ -28,10 +25,7 @@ public class Feeder {
     public static ArrayList<Double> convertArray(Array arr) {
         ArrayList<Double> buffer = new ArrayList<>();
         String toBeProcessed = arr.toString();
-        int counter = 0;
-        for (int i = 0; i < toBeProcessed.length(); i++)
-            if (toBeProcessed.charAt(i) == ' ')
-                counter++;
+
         while (toBeProcessed.contains(" ")) {
 //          System.out.println(toBeProcessed + toBeProcessed.indexOf(" "));
             buffer.add(Double.parseDouble(toBeProcessed.substring(0, toBeProcessed.indexOf(" "))));
@@ -43,10 +37,11 @@ public class Feeder {
     public static void init() {
         myFile = Reader.readMyFile();
         String varName[] = {"lat", "lon", "AODANA"};
-        for (NetcdfFile myFile : myFile)
+        for (NetcdfFile myFile : myFile) {
             for (int j = 0; j < 3; j++) {
-                if (myFile == null)
+                if (myFile == null) {
                     continue;
+                }
                 Variable v = myFile.findVariable(varName[j]);
                 Array data = null;
                 try {
@@ -54,7 +49,7 @@ public class Feeder {
                 } catch (IOException ioe) {
                     System.out.println("trying to read " + varName + ioe);
                 }
-                if (data != null)
+                if (data != null) {
                     switch (j) {
                         case 0:
                             latDump.addAll(convertArray(data));
@@ -65,19 +60,23 @@ public class Feeder {
                         case 2:
                             ArrayList<Double> holder = convertArray(data);
                             double sum = 0;
-                            for (double d : holder)
+                            for (double d : holder) {
                                 sum += d;
+                            }
                             aodDump.add(sum / holder.size());
                             break;
                     } //                    System.out.println(data);
+                }
             }
+        }
         double result = 0;
         double x = Integer.MAX_VALUE;
         for (double d : lonDump) {
 
             System.out.println(d);
-            if (x > d)
+            if (x > d) {
                 x = d;
+            }
             result = x;
         }
         System.out.println("RESULT " + result);

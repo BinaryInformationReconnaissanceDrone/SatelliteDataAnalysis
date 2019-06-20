@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class describes each .nc file of the NetCDF format
  */
 package satelliteaod;
 
@@ -82,8 +80,9 @@ public class DataFile {
         ArrayList<Double> holder = convertArray(fileString);
 
         double sum = 0;
-        for (double d : holder)
+        for (double d : holder) {
             sum += d;
+        }
         return "" + (sum / holder.size());
     }
 

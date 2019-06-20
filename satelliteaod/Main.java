@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Main class of the program.
+ * Goes through each data file, collects them, sorts them, prints the compendium and closes the stream
  */
 package satelliteaod;
 
@@ -54,8 +53,9 @@ public class Main {
 //            PrintWriter seasonWrite = new PrintWriter(new FileWriter("SEASON" + place + ".txt"));
             PrintWriter monthWrite = new PrintWriter(new FileWriter("MONTH" + place[i] + ".txt"));
             PrintWriter anomalyWrite = new PrintWriter(new FileWriter("ANOMALY" + place[i] + ".txt"));
-            for (DataFile d : collection)
+            for (DataFile d : collection) {
                 rawWrite.println(d);
+            }
 //            System.out.println(collection.size());
             rawWrite.close();
 
@@ -69,13 +69,16 @@ public class Main {
 //            seasonWrite.close();
             AnomalyAnalysis.init(collection);
             AnomalyAnalysis.compileAnomaly();
-            for (Double d : AnomalyAnalysis.getAnomaly())
-                if (d != null)
+            for (Double d : AnomalyAnalysis.getAnomaly()) {
+                if (d != null) {
                     anomalyWrite.println(d);
+                }
+            }
             anomalyWrite.close();
 
-            for (double f : AnomalyAnalysis.getAverage())
+            for (double f : AnomalyAnalysis.getAverage()) {
                 monthWrite.println(f);
+            }
 
             monthWrite.close();
             Reader.close();

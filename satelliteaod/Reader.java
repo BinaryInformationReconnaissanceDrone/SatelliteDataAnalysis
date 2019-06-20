@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *This class reads from the list of files and returns it to main for analysis and processing
  */
 package satelliteaod;
 
@@ -38,7 +36,7 @@ public class Reader {
         ncfileList = new NetcdfFile[fileList.length];
         int counter = 0;
         try {
-            for (int i = 0; i < fileList.length; i++)
+            for (int i = 0; i < fileList.length; i++) {
                 if (fileList[i].contains(".nc")) {
                     fileName = newDirectory + "/" + fileList[i];
 //                    System.out.println(fileName);
@@ -47,6 +45,7 @@ public class Reader {
                     new DataFile(holder, fileList[i]);
                     counter++;
                 }
+            }
         } catch (IOException ioe) {
             System.out.println("trying to open " + fileName);
         }
@@ -54,13 +53,15 @@ public class Reader {
     }
 
     public static void close() {
-        for (int i = 0; i < fileList.length; i++)
-            if (null != ncfileList[i])
+        for (int i = 0; i < fileList.length; i++) {
+            if (null != ncfileList[i]) {
                 try {
                     ncfileList[i].close();
                 } catch (IOException ioe) {
                     System.out.println("trying to close " + fileList[0] + ioe);
                 }
+            }
+        }
     }
 
     /**

@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class computes the averages for each month
  */
 package satelliteaod;
 
@@ -25,11 +23,13 @@ public final class SeasonalAnalysis {
     public static void compileSeason() {
         ArrayList<Double>[] holder = new ArrayList[40];//MIGHT NEED TO CHANGE THIS IF YEAR IS LATER THAN 2020
 
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 40; i++) {
             holder[i] = new ArrayList<>();
+        }
 
-        for (DataFile d : list)
+        for (DataFile d : list) {
             holder[d.getYear() - 1980].add(Double.parseDouble(d.toString()));
+        }
 
         for (ArrayList<Double> arr : holder) {
             Double[] average = new Double[4];
